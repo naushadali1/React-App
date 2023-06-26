@@ -23,7 +23,7 @@ export default function TextForm(props) {
         setText(event.target.value);
     }
 
-    return (<>
+    return (<div>
         <div className="container" style={{ color: props.mode === 'light' ? 'black' : 'white' }}>
             <div className="mb-3 my-5">
                 <h1> {props.heading}</h1>
@@ -43,6 +43,6 @@ export default function TextForm(props) {
             <p>{text.length > 0 ? text : "Enter something in the above textbox to preview here "}</p>
         </div>
 
-    </>
+    </div>
     )
 } 
