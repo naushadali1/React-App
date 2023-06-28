@@ -1,4 +1,4 @@
-import React, { cloneElement, useState } from 'react'
+import React, { useState } from 'react'
 
 export default function TextForm(props) {
     const [text, setText] = useState("");
@@ -19,6 +19,17 @@ export default function TextForm(props) {
         props.showAlert("Text Cleared", "success");
     }
 
+    const handleCopy = () => {
+        navigator.clipboard.writeText(text);
+        props.showAlert("Copied to Clipboard!", "success");
+    }
+
+    const handleExtraSpaces = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+        props.showAlert("Extra spaces removed!", "success");
+    }
+
     const onChanged = (event) => {
         setText(event.target.value);
     }
@@ -33,10 +44,12 @@ export default function TextForm(props) {
             <button className="btn btn-primary mx-2 my-2" onClick={handelUpClick}> Convert Into Upper Case </button>
             <button className="btn btn-primary mx-2 my-2" onClick={handelLowerClick}> Convert Into Lower Case </button>
             <button className="btn btn-primary mx-2 my-2" onClick={handelClearClick}> Clear Text </button>
+            <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}> Copy Text </button>
+            <button className="btn btn-primary mx-2 my-2" onClick={handleExtraSpaces}> Remove Extra Spaces </button>
         </div>
         <div className="container" style={{ color: props.mode === 'light' ? 'black' : 'white' }}>
             <h1>You Text Summary</h1>
-            <p> the text have {text.split(" ").length}words</p>
+            <p> the text have {text.split(" ").length} words</p>
             <p> the text have {text.length} Characters</p>
             <p> {0.008 * text.split(" ").length} Minutes to Read</p>
             <h2> Preview </h2>
